@@ -3,7 +3,9 @@ import { test, expect } from '@playwright/test';
 test('can navigate to login', async ({ page }) => {
   await page.goto('https://mcy0dn.csb.app/');
 
-  // Task 49
-  // Write a test that will click the icon button in the upper left and assert
-  // that the browser has navigated to the login page.
+  await page.getByLabel('Login').click();
+
+  await expect(page).toHaveURL('https://mcy0dn.csb.app/login');
+
+  await expect(page.getByRole('heading')).toContainText('Login');
 });
