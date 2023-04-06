@@ -3,6 +3,13 @@ import { test, expect } from '@playwright/test';
 test('displays movies', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  // Task 47
-  // Write a test to ensure a movie is displayed
+  await expect(
+    page.getByRole('heading', { name: 'Knock at the Cabin' }),
+  ).toBeVisible();
+
+  await expect(
+    page.getByText('While vacationing at a remote cabin'),
+  ).toBeVisible();
+
+  await expect(page.getByAltText('Knock at the Cabin')).toBeVisible();
 });
