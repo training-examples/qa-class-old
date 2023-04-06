@@ -1,0 +1,22 @@
+{
+  "name": "hello-world",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "test": "npx playwright test --project=chromium"
+  },
+  "dependencies": {
+    "vite": "^2.6.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.32.2",
+    "@types/jest": "^29.5.0",
+    "jest": "^29.4.3",
+    "jest-environment-jsdom": "^29.4.3"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
+  "private": true
+}
