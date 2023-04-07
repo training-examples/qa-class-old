@@ -13,8 +13,24 @@ test('can navigate to login', async ({ page }) => {
 
   await expect(page).toHaveURL('https://demo.realworld.io/#/');
 
-  // Task 53
-  // Keep all the above (because we do need to login before we do the next steps)
-  // Add some tests to create an article and post it
-  // Then test that it appears on the home feed
+  await page.getByRole('link', { name: 'New Article' }).click();
+
+  await expect(page).toHaveURL('https://demo.realworld.io/#/editor/');
+
+  let articleTitle = `Test Article ${Date.now()}`;
+
+  await page.getByPlaceholder('Article Title').fill(articleTitle);
+  await page.getByPlaceholder(`What's this article about?`).fill('QA Testing');
+  await page
+    .getByPlaceholder(`Write your article (in markdown)`)
+    .fill(
+      `QA (Quality Assurance) testing is an essential process in software development that aims to ensure that software products meet the expected quality standards. QA testing involves a range of activities, including functional testing, performance testing, security testing, and usability testing, among others.`,
+    );
+  await page.getByRole('button', { name: 'Publish Article' }).click();
+
+  await expect(page.getByRole('heading', { name: articleTitle })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Delete Article' }).click();
+
+  await expect(page).toHaveURL('https://demo.realworld.io/#/');
 });
